@@ -28,8 +28,8 @@
         var urlParams = new URLSearchParams(window.location.search);
         var pdfFile = urlParams.get('pdfFile');
         
-        // Set the src attribute of the iframe element to the PDF file
-        pdfViewer.src = pdfFile;
+        // Set the src attribute of the iframe element to use Google Docs Viewer to display the PDF file
+        pdfViewer.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfFile) + "&embedded=true";
     </script>
 </body>
 </html>
