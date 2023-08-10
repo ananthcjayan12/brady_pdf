@@ -42,6 +42,17 @@
         // Set the src attribute of the iframe element to use Google Docs Viewer to display the PDF file
         pdfViewer.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfFile) + "&embedded=true";
         
+        // Check if the iframe has loaded properly every 2 seconds
+        var interval = setInterval(function() {
+            if (pdfViewer.contentDocument && pdfViewer.contentDocument.body && pdfViewer.contentDocument.body.children.length === 0) {
+                // If the iframe is empty, reload it
+                pdfViewer.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfFile) + "&embedded=true";
+            } else {
+                // If the iframe is not empty, stop checking
+                clearInterval(interval);
+            }
+        }, 2000);
+        
         // Hide the loading message when the iframe has finished loading
         function hideLoadingMessage() {
             loadingMessage.style.display = "none";
